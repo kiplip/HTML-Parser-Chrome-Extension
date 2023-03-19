@@ -28,3 +28,14 @@ Feel free to open issues or submit pull requests if you find any bugs or have su
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+
+## Contact
+
+Adnan Shahid | UI UX Designer, Graphics, Mobile, Print, CSS3, HTML5, Bootstrap, Responsive Design  
+Email: mr.bunty@gmail.com  
+Phone: +92-3336515722 (best number)  
+Website: www.adnanshahid.com  
+Twitter: twitter.com/adnanblog
+Facebook: facebook.com/creativelook
+LinkedIn: linkedin.com/in/adnanshahid0 
