@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+       body {
+        width: 700px;
+        height: 500px;
+        font-family: Arial, sans-serif;
+        overflow: auto;
+      }
+      #results {
+        padding-top: 20px;
+        height: 200px;
+        overflow-y: auto;
+      }
+      #selected {
+        height: 300px;
+        overflow-y: auto; /* Add a vertical scrollbar to the selected div */
+      }
+      .htmlElement {
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        padding: 5px;
+        margin-bottom: 5px;
+        background-color: #f9f9f9;
+        cursor: pointer;
+      }
+      .htmlElement:hover {
+        background-color: #e9e9e9;
+      }
+      .selectedElement {
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        padding: 5px;
+        margin-bottom: 5px;
+        background-color: #e9e9e9;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="display: flex; width: 100%; padding: 5px; margin-bottom: 10px;">
+        <input type="text" id="searchBar" placeholder="Search elements..." style="flex-grow: 1; padding: 5px; margin-right: 5px;">
+        <button id="searchBtn">Search</button>
+      </div>
+      
+    <button id="parseBtn">Parse HTML</button>
+    <button id="resetBtn">Reset</button>
+    <button id="reparseBtn">Reparse</button>
+    <div id="results"></div>
+    <div id="selected"></div>
+    <script src="popup.js"></script>
+  </body>
+</html>
