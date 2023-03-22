@@ -109,10 +109,8 @@ function createHtmlElement(element) {
 
   function createSelectedElement(element) {
     const div = document.createElement("div");
-    div.style.display = "flex";
-    div.style.justifyContent = "space-between";
-    div.style.alignItems = "center";
-    div.style.marginBottom = "5px";
+    div.className = "flex justify-between items-center mb-4 bg-white border border-gray-200 rounded shadow p-4"; // Tailwind CSS classes for card style
+    div.style.width = "100%";
     
     const detailsDiv = document.createElement("div");
     detailsDiv.innerHTML = `<b>Selector:</b> ${getSelector(element)}<br><b>HTML:</b> ${element.outerHTML}`;
