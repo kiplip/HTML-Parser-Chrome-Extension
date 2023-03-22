@@ -80,9 +80,9 @@ function createHtmlElement(element) {
         // Add delete button to parsed elements
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "Delete";
-        deleteButton.style.marginLeft = "5px";
+        deleteButton.className = "ml-2 bg-red-500 text-white px-2 py-1 rounded"; // Tailwind CSS classes for red button
         deleteButton.addEventListener("click", () => {
-        el.remove();
+          el.remove();
         });
         el.appendChild(deleteButton);
 
@@ -119,11 +119,13 @@ function createHtmlElement(element) {
     div.appendChild(detailsDiv);
   
     const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
-    deleteButton.addEventListener("click", () => {
-      div.remove();
-    });
-    div.appendChild(deleteButton);
+  deleteButton.textContent = "Delete";
+  deleteButton.className = "bg-red-500 text-white px-2 py-1 rounded"; // Tailwind CSS classes for red button
+  deleteButton.addEventListener("click", () => {
+    div.remove();
+  });
+  div.appendChild(deleteButton);
+
   
     return div;
   }
