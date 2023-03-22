@@ -36,6 +36,6 @@ Adnan Shahid | UI UX Designer, Graphics, Mobile, Print, CSS3, HTML5, Bootstrap, 
 Email: mr.bunty@gmail.com  
 Phone: +92-3336515722 (best number)  
 Website: www.adnanshahid.com  
-Twitter: twitter.com/adnanblog
-Facebook: facebook.com/creativelook
-LinkedIn: linkedin.com/in/adnanshahid0 
+Twitter: www.twitter.com/adnanblog
+Facebook: www.facebook.com/creativelook
+LinkedIn: www.linkedin.com/in/adnanshahid0 
