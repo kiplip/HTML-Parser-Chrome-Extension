@@ -50,7 +50,7 @@ function createHtmlElement(element) {
     const parser = new DOMParser();
     const htmlDoc = parser.parseFromString(response.source, 'text/html');
     const allElements = htmlDoc.querySelectorAll('*');
-    console.log(allElements);
+     
     const resultsDiv = document.getElementById("results");
     resultsDiv.innerHTML = "";
   
@@ -86,60 +86,80 @@ function createHtmlElement(element) {
         });
         el.appendChild(deleteButton);
 
-          // Add mouseover and mouseout event listeners for highlighting elements
-    el.addEventListener("mouseover", () => {
-        highlightElement(element, true);
-      });
-      el.addEventListener("mouseout", () => {
-        highlightElement(element, false);
-      });
-
-
-
-      el.addEventListener("click", () => {
-        const selectedDiv = document.getElementById("selected");
-        const selectedElement = createSelectedElement(element);
-        selectedDiv.appendChild(selectedElement);
-      });
+ 
+ 
       resultsDiv.appendChild(el);
     });
   }
   
 
 
-  function createSelectedElement(element) {
+  function createHtmlElement(element) {
     const div = document.createElement("div");
-    div.className = "flex justify-between items-center mb-4 bg-white border border-gray-200 rounded shadow p-4"; // Tailwind CSS classes for card style
-    div.style.width = "100%";
+    div.className = "htmlElement p-4 mb-4 bg-white border border-gray-200 rounded shadow";
+    div.dataset.selector = getSelector(element);
     
-    const detailsDiv = document.createElement("div");
-    detailsDiv.innerHTML = `<b>Selector:</b> ${getSelector(element)}<br><b>HTML:</b> ${element.outerHTML}`;
-    div.appendChild(detailsDiv);
+    const tagName = document.createElement("b");
+    tagName.textContent = element.tagName.toLowerCase();
+    div.appendChild(tagName);
   
-    const deleteButton = document.createElement("button");
-  deleteButton.textContent = "Delete";
-  deleteButton.className = "bg-red-500 text-white px-2 py-1 rounded"; // Tailwind CSS classes for red button
-  deleteButton.addEventListener("click", () => {
-    div.remove();
-  });
-  div.appendChild(deleteButton);
-
+    if (element.id) {
+      const id = document.createElement("span");
+      id.textContent = `#${element.id}`;
+      id.style.color = "blue";
+      div.appendChild(id);
+    }
+  
+    if (element.className) {
+      const classNames = document.createElement("span");
+      classNames.textContent = `.${(element.className.toString()).replace(/\s+/g, '.')}`; // Convert className to string
+      classNames.style.color = "green";
+      div.appendChild(classNames);
+    }
+  
+    const contentPreview = document.createElement("span");
+    contentPreview.textContent = ` - ${element.textContent.trim().substring(0, 20)}...`;
+    contentPreview.style.color = "gray";
+    div.appendChild(contentPreview);
+  
+    // Display the full XPath
+    const xpath = document.createElement("div");
+    xpath.innerHTML = `<b>XPath:</b> ${generateXPath(element)}`;
+    div.appendChild(xpath);
+  
+    // Display innerHTML, truncated to 50 characters
+    const innerHtml = document.createElement("div");
+    innerHtml.innerHTML = `<b>InnerHTML:</b> ${element.innerHTML.substring(0, 50)}...`;
+    div.appendChild(innerHtml);
   
     return div;
   }
-
-  function highlightElement(element, highlight) {
-    const originalBackgroundColor = element.style.backgroundColor;
-    const originalOutline = element.style.outline;
   
-    if (highlight) {
-      element.style.backgroundColor = "rgba(255, 255, 0, 0.5)";
-      element.style.outline = "1px solid rgba(255, 255, 0, 0.5)";
-    } else {
-      element.style.backgroundColor = originalBackgroundColor;
-      element.style.outline = originalOutline;
+  function generateXPath(element) {
+    if (element.id !== '') {
+      return '//*[@id="' + element.id + '"]';
+    }
+  
+    if (element === document.body) {
+      return element.tagName;
+    }
+  
+    let ix = 0;
+    const siblings = element.parentNode.childNodes;
+    for (let i = 0; i < siblings.length; i++) {
+      const sibling = siblings[i];
+      if (sibling === element) {
+        return generateXPath(element.parentNode) + '/' + element.tagName + '[' + (ix + 1) + ']';
+      }
+      if (sibling.nodeType === 1 && sibling.tagName === element.tagName) {
+        ix++;
+      }
     }
   }
+  
+  // Rest of the popup.js code remains the same
+  
+ 
 
 
 
@@ -188,10 +208,8 @@ function createHtmlElement(element) {
   
   document.getElementById("resetBtn").addEventListener("click", () => {
     const resultsDiv = document.getElementById("results");
-    const selectedDiv = document.getElementById("selected");
-    resultsDiv.innerHTML = "";
-    selectedDiv.innerHTML = "";
-  });
+     resultsDiv.innerHTML = "";
+   });
   
   document.getElementById("reparseBtn").addEventListener("click", () => {
     chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
@@ -215,26 +233,4 @@ function createHtmlElement(element) {
   });
 
  
-
- // JavaScript code for tab switching
- document.getElementById("tab1").addEventListener("click", function() {
-  document.getElementById("tab1Content").style.display = "block";
-  document.getElementById("tab2Content").style.display = "none";
-  document.getElementById("tab1").classList.add("bg-blue-500");
-  document.getElementById("tab1").classList.add("text-white");
-  document.getElementById("tab2").classList.remove("bg-blue-500");
-  document.getElementById("tab2").classList.remove("text-white");
-  document.getElementById("tab2").classList.add("bg-gray-300");
-  document.getElementById("tab2").classList.add("text-black");
-});
-
-document.getElementById("tab2").addEventListener("click", function() {
-  document.getElementById("tab1Content").style.display = "none";
-  document.getElementById("tab2Content").style.display = "block";
-  document.getElementById("tab2").classList.add("bg-blue-500");
-  document.getElementById("tab2").classList.add("text-white");
-  document.getElementById("tab1").classList.remove("bg-blue-500");
-  document.getElementById("tab1").classList.remove("text-white");
-  document.getElementById("tab1").classList.add("bg-gray-300");
-    document.getElementById("tab1").classList.add("text-black");
-  });
+ 
