@@ -144,10 +144,8 @@ function createHtmlElement(element) {
 
 
   function searchElements() {
-    const searchBar = document.getElementById("searchBar"); // Add this line
-
     const searchText = searchBar.value.toLowerCase();
-    const allParsedElements = document.querySelectorAll(".parsedElement");
+    const allParsedElements = document.querySelectorAll("#results .htmlElement");
   
     allParsedElements.forEach((element) => {
       const elementText = element.textContent.toLowerCase();
@@ -204,26 +202,17 @@ function createHtmlElement(element) {
  
 
   // Add event listener for search button
-const searchBtn = document.getElementById("searchBtn");
-searchBtn.addEventListener("click", () => {
-  searchElements();
-});
+  const searchBtn = document.getElementById("searchBtn");
+  searchBtn.addEventListener("click", () => {
+    searchElements();
+  });
+  
 
-// Automatically show the tree structure of the focused element
-document.addEventListener("DOMContentLoaded", async () => {
-  const focusedElement = await getFocusedElement();
-  parseHtml(focusedElement);
-});
-
-
-
-
-
-
-
-
-
-
+  // Automatically show the tree structure of the focused element
+  document.addEventListener("DOMContentLoaded", async () => {
+    const focusedElement = await getFocusedElement();
+    parseHtml(focusedElement);
+  });
 
  
 
