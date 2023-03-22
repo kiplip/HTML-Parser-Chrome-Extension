@@ -1,7 +1,7 @@
 function createHtmlElement(element) {
-    const div = document.createElement("div");
-    div.className = "htmlElement";
-    div.dataset.selector = getSelector(element);
+  const div = document.createElement("div");
+  div.className = "htmlElement p-4 mb-4 bg-white border border-gray-200 rounded shadow";
+  div.dataset.selector = getSelector(element);
   
     const tagName = document.createElement("b");
     tagName.textContent = element.tagName.toLowerCase();
@@ -14,13 +14,7 @@ function createHtmlElement(element) {
       div.appendChild(id);
     }
   
-  /*  if (element.className) {
-      const classNames = document.createElement("span");
-      classNames.textContent = `.${element.className.replace(/\s+/g, '.')}`;
-      classNames.style.color = "green";
-      div.appendChild(classNames);
-    }
-  */
+
     if (element.className) {
         const classNames = document.createElement("span");
         classNames.textContent = `.${(element.className.toString()).replace(/\s+/g, '.')}`; // Convert className to string
@@ -56,6 +50,7 @@ function createHtmlElement(element) {
     const parser = new DOMParser();
     const htmlDoc = parser.parseFromString(response.source, 'text/html');
     const allElements = htmlDoc.querySelectorAll('*');
+    console.log(allElements);
     const resultsDiv = document.getElementById("results");
     resultsDiv.innerHTML = "";
   
@@ -149,6 +144,8 @@ function createHtmlElement(element) {
 
 
   function searchElements() {
+    const searchBar = document.getElementById("searchBar"); // Add this line
+
     const searchText = searchBar.value.toLowerCase();
     const allParsedElements = document.querySelectorAll(".parsedElement");
   
@@ -217,3 +214,38 @@ document.addEventListener("DOMContentLoaded", async () => {
   const focusedElement = await getFocusedElement();
   parseHtml(focusedElement);
 });
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+ // JavaScript code for tab switching
+ document.getElementById("tab1").addEventListener("click", function() {
+  document.getElementById("tab1Content").style.display = "block";
+  document.getElementById("tab2Content").style.display = "none";
+  document.getElementById("tab1").classList.add("bg-blue-500");
+  document.getElementById("tab1").classList.add("text-white");
+  document.getElementById("tab2").classList.remove("bg-blue-500");
+  document.getElementById("tab2").classList.remove("text-white");
+  document.getElementById("tab2").classList.add("bg-gray-300");
+  document.getElementById("tab2").classList.add("text-black");
+});
+
+document.getElementById("tab2").addEventListener("click", function() {
+  document.getElementById("tab1Content").style.display = "none";
+  document.getElementById("tab2Content").style.display = "block";
+  document.getElementById("tab2").classList.add("bg-blue-500");
+  document.getElementById("tab2").classList.add("text-white");
+  document.getElementById("tab1").classList.remove("bg-blue-500");
+  document.getElementById("tab1").classList.remove("text-white");
+  document.getElementById("tab1").classList.add("bg-gray-300");
+    document.getElementById("tab1").classList.add("text-black");
+  });
